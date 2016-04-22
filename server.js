@@ -4,9 +4,19 @@ var http = require('http');
 
 var app = express();
 
+var EVIL_IP = "123.45.67.89";
+
 // Static Middleware
 var publicPath = path.resolve(__dirname, 'public');
 app.use(express.static(publicPath));
+
+app.use(function(request, response, next) {
+  if (request.ip === EVIL_IP) {
+    response.status(401).send("Not allowed!");
+  } else {
+    next();
+  }
+});
 
 // Routing
 app.get('/', function(request, response) {
