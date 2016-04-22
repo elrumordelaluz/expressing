@@ -21,6 +21,12 @@ app.get('/why', function(request, response) {
   response.redirect('/hello/wordl');
 });
 
+app.get('/music', function(request, response) {
+  response.sendFile("music.mp4", {
+    root: publicPath
+  });
+});
+
 app.get('/hello/:who', function(request, response) {
   response.end('Hello, ' + request.params.who + '.');
 });
