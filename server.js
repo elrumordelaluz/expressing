@@ -17,6 +17,10 @@ app.get('/about', function(request, response) {
   response.end('This is the About page.');
 })
 
+app.get('/hello/:who', function(request, response) {
+  response.end('Hello, ' + request.params.who + '.');
+});
+
 // If doesn't match with the previous...
 app.use(function(request, response) {
   response.statusCode = 404;
