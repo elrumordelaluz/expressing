@@ -15,7 +15,11 @@ app.get('/', function(request, response) {
 
 app.get('/about', function(request, response) {
   response.end('This is the About page.');
-})
+});
+
+app.get('/why', function(request, response) {
+  response.redirect('/hello/wordl');
+});
 
 app.get('/hello/:who', function(request, response) {
   response.end('Hello, ' + request.params.who + '.');
