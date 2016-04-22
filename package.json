@@ -12,5 +12,8 @@
   },
   "keywords": [],
   "author": "Lionel T <elrumordelaluz@hotmail.com> (elrumordelaluz.com)",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
