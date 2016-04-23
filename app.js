@@ -2,19 +2,20 @@ var express = require('express');
 
 var app = express();
 
-app.get('/random/:min/:max', function(req, res) {
-  var min = parseInt(req.params.min);
-  var max = parseInt(req.params.max);
+app.get('/', function(req, res) {
+  res.send('You just sent a GET request.')
+});
 
-  if (isNaN(min) || isNaN(max)) {
-    res.status(400);
-    res.json({ error: 'Bad request.' });
-    return;
-  }
+app.post('/', function(req, res) {
+  res.send('You just sent a POST request.')
+});
 
-  var result = Math.round(Math.random() * (max - min) + min);
+app.put('/', function(req, res) {
+  res.send('You just sent a PUT request.')
+});
 
-  res.json({ result: result });
+app.delete('/', function(req, res) {
+  res.send('You just sent a DELETE request.')
 });
 
 app.listen(3000, function() {
