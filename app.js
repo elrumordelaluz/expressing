@@ -1,25 +1,50 @@
 var express = require('express');
 var path = require('path');
+var zipdb = require('zippity-do-dah');
+var ForecastIo = require('forecastio');
+var ejs = require('ejs');
+var logger = require('morgan');
 
 var app = express();
-var filePath = path.join(__dirname, 'static/circl.svg');
+var weather = new ForecastIo('2aab27832656b2cf3af4ffb1290996f8');
 
-app.use(function(req, res, next) {
-  res.sendFile(filePath, function(err) {
-    if (err) {
-      next(new Error('Error sending file!'));
-    }
-  });
-})
+app.use(express.static(path.resolve(__dirname, 'public')));
 
-app.use(function(err, req, res, next) {
-  console.log(err);
-  next(err);
+app.set('views', path.resolve(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(logger('short'));
+
+app.get('/', function(req, res) {
+  res.render('index');
 });
 
-app.use(function(err, req, res, next) {
-  res.status(500);
-  res.send('Internal Server Error.');
+app.get(/^\/(\d{5})$/, function(req, res, next) {
+  var zipcode = req.params[0];
+  var location = zipdb.zipcode(zipcode);
+  if (!location.zipcode) {
+    next();
+    return;
+  }
+
+  var latitude = location.latitude;
+  var longitude = location.longitude;
+
+  weather.forecast(latitude, longitude, function(err, data) {
+    if (err) {
+      next();
+      return;
+    }
+
+    res.json({
+      zipcode: zipcode,
+      temperature: data.currently.temperature
+    });
+  });
+});
+
+app.use(function(req, res) {
+  res.status(404).render('404');
 });
 
 app.listen(3000, function() {

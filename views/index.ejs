@@ -1,19 +1,11 @@
 <% include header %>
-<% if (entries.length) { %>
-  <% entries.forEach(function(entry) { %>
-    <div class="panel panel-default">
-      <div class="panel panel-heading">
-        <div class="text-muted pull-right">
-          <%= entry.published %>
-        </div>
-        <%= entry.title %>
-      </div>
-      <div class="panel panel-body">
-        <%= entry.content %>
-      </div>
-    </div>
-  <% }) %>
-<% } else { %>
-  No entries! <a href="/new-entry">Add one!</a>
-<% } %>
+<h1>What’s your ZIP code?</h1>
+<form class="pure-form">
+  <fieldset>
+    <input type="number" name="zip" placeholder="12345" autofocus required>
+    <input type="submit" class="pure-button pure-button-primary" value="Go">
+  </fieldset>
+</form>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="/main.js"></script>
 <% include footer %>
