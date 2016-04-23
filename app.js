@@ -1,19 +1,26 @@
 var express = require('express');
-var morgan = require('morgan');
 var path = require('path');
 
 var app = express();
-var morganMiddleware = morgan('short');
-var staticPath = path.join(__dirname, 'static');
+var filePath = path.join(__dirname, 'static/circl.svg');
 
-app.use(morganMiddleware);
-app.use(express.static(staticPath));
-
-
-app.use(function(req, res) {
-  res.status(404);
-  res.send('File not found!');
+app.use(function(req, res, next) {
+  res.sendFile(filePath, function(err) {
+    if (err) {
+      next(new Error('Error sending file!'));
+    }
+  });
 })
+
+app.use(function(err, req, res, next) {
+  console.log(err);
+  next(err);
+});
+
+app.use(function(err, req, res, next) {
+  res.status(500);
+  res.send('Internal Server Error.');
+});
 
 app.listen(3000, function() {
   console.log('App started on Port: 3000.');
