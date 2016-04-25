@@ -1,11 +1,18 @@
-<% include header %>
-<h1>What’s your ZIP code?</h1>
-<form class="pure-form">
-  <fieldset>
-    <input type="number" name="zip" placeholder="12345" autofocus required>
-    <input type="submit" class="pure-button pure-button-primary" value="Go">
-  </fieldset>
-</form>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="/main.js"></script>
-<% include footer %>
+<% include _header %>
+
+<h1>Welcome to Learn About Me!</h1>
+
+<% users.forEach(function(user) { %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <a href="/users/<%= user.username %>">
+        <%= user.name() %>
+      </a>
+    </div>
+    <% if (user.bio) { %>
+      <div class="panel-body"><%= user.bio %></div>
+    <% } %>
+  </div>
+<% }) %>
+
+<% include _footer %>
