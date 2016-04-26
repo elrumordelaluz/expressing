@@ -38,4 +38,10 @@ describe('capitalize', function() {
     expect(capitalize(str)).to.equal('Who is javascript?');
     expect(str.valueOf()).to.equal('who is JavaScript?');
   });
+
+  it('throws an error if passed a number', function() {
+    expect(function() {
+      capitalize(123);
+    }).to.throw(Error);
+  });
 });
