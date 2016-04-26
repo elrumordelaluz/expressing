@@ -1,18 +1,18 @@
-<% include _header %>
-
-<h1>Welcome to Learn About Me!</h1>
-
-<% users.forEach(function(user) { %>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <a href="/users/<%= user.username %>">
-        <%= user.name() %>
-      </a>
-    </div>
-    <% if (user.bio) { %>
-      <div class="panel-body"><%= user.bio %></div>
-    <% } %>
-  </div>
-<% }) %>
-
-<% include _footer %>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    html {
+      font-family: sans-serif;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>Your User Agent is:</h2>
+  <h1 class="user-agent">
+    <%= userAgent %>
+  </h1>
+</body>
+</html>
