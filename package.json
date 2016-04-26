@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app"
+    "start": "node app",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -27,5 +28,9 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "zippity-do-dah": "0.0.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
   }
 }
