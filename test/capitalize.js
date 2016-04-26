@@ -44,4 +44,9 @@ describe('capitalize', function() {
       capitalize(123);
     }).to.throw(Error);
   });
+
+  it('changes the value', function() {
+    var str = 'foo';
+    expect(capitalize(str)).not.to.equal(str);
+  });
 });
