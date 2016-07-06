@@ -1,6 +1,6 @@
 # Expressing
 
-Playing, expressing with Express
+Playing with Express
 
 ```bash
 $ npm i
